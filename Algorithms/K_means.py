@@ -4,7 +4,7 @@ from sklearn.metrics import silhouette_score
 
 
 def apply_k_means_fe_resolution_dataset(normalization_type):
-    x = data_loader("Datasets/fe_resolution_" + normalization_type + "_dataset.csv").iloc[:, :-1]
+    x = data_loader("Datasets/fe_resolution_" + normalization_type + "_dataset.csv").iloc[:, 1:-1]
     kmeans = KMeans(n_clusters=4, random_state=38, n_init=10)
     kmeans.fit(x)
     predicted_labels = kmeans.labels_
@@ -13,7 +13,7 @@ def apply_k_means_fe_resolution_dataset(normalization_type):
 
 
 def apply_k_means_normal_dataset(normalization_type):
-    x = data_loader("Datasets/" + normalization_type + "_dataset.csv").iloc[:, :-1]
+    x = data_loader("Datasets/" + normalization_type + "_dataset.csv").iloc[:, 1:-1]
     kmeans = KMeans(n_clusters=4, random_state=38, n_init=10)
     kmeans.fit(x)
     predicted_labels = kmeans.labels_
@@ -22,7 +22,7 @@ def apply_k_means_normal_dataset(normalization_type):
 
 
 def apply_k_means_fe_screen_size_dataset(normalization_type):
-    x = data_loader("Datasets/fe_screen_size_" + normalization_type + "_dataset.csv").iloc[:, :-1]
+    x = data_loader("Datasets/fe_screen_size_" + normalization_type + "_dataset.csv").iloc[:, 1:-1]
     kmeans = KMeans(n_clusters=4, random_state=38, n_init=10)
     kmeans.fit(x)
     predicted_labels = kmeans.labels_

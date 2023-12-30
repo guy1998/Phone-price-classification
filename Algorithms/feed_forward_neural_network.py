@@ -8,7 +8,7 @@ import pandas as pd
 def apply_mlp_fe_resolution(normalization_type, train_size, n_hidden, optimizer, activation):
     x = data_loader("Datasets/fe_resolution_" + normalization_type + "_dataset.csv")
     y = pd.Series(x['price_range'])
-    x = x.iloc[:, :-1]
+    x = x.iloc[:, 1:-1]
     x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=train_size, random_state=42)
     mlp = MLPClassifier(verbose=True, hidden_layer_sizes=(n_hidden,), solver=optimizer, activation=activation,
                         max_iter=10000,
@@ -22,7 +22,7 @@ def apply_mlp_fe_resolution(normalization_type, train_size, n_hidden, optimizer,
 def apply_mlp_fe_screen_size(normalization_type, train_size, n_hidden, optimizer, activation):
     x = data_loader("Datasets/fe_screen_size_" + normalization_type + "_dataset.csv")
     y = pd.Series(x['price_range'])
-    x = x.iloc[:, :-1]
+    x = x.iloc[:, 1:-1]
     x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=train_size, random_state=42)
     mlp = MLPClassifier(verbose=True, hidden_layer_sizes=(n_hidden,), solver=optimizer, activation=activation,
                         max_iter=10000,
@@ -35,7 +35,7 @@ def apply_mlp_fe_screen_size(normalization_type, train_size, n_hidden, optimizer
 def apply_mlp_normal(normalization_type, train_size, n_hidden, optimizer, activation):
     x = data_loader("Datasets/" + normalization_type + "_dataset.csv")
     y = pd.Series(x['price_range'])
-    x = x.iloc[:, :-1]
+    x = x.iloc[:, 1:-1]
     x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=train_size, random_state=42)
     mlp = MLPClassifier(verbose=True, hidden_layer_sizes=(n_hidden,), solver=optimizer, activation=activation,
                         max_iter=10000,
