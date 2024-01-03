@@ -51,7 +51,7 @@ def apply_svm_normal_dataset(normalization_type, train_split, kernel, degree):
 
 
 def apply_svm_raw_dataset(train_split, kernel, degree):
-    x = data_loader("../train.csv")
+    x = data_loader("train.csv")
     y = pd.Series(x['price_range'])
     x = x.iloc[:, :-1]
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=(1 - train_split), random_state=7)
