@@ -12,7 +12,7 @@ def apply_mlp_fe_resolution(normalization_type, train_size, n_hidden, optimizer,
     x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=train_size, random_state=42)
     mlp = MLPClassifier(verbose=True, hidden_layer_sizes=(n_hidden,), solver=optimizer, activation=activation,
                         max_iter=10000,
-                        random_state=42)
+                        random_state=42, learning_rate='adaptive')
     mlp.fit(x_train, y_train)
     y_predict = mlp.predict(x_test)
     accuracy = accuracy_score(y_test, y_predict)
@@ -26,11 +26,12 @@ def apply_mlp_fe_screen_size(normalization_type, train_size, n_hidden, optimizer
     x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=train_size, random_state=42)
     mlp = MLPClassifier(verbose=True, hidden_layer_sizes=(n_hidden,), solver=optimizer, activation=activation,
                         max_iter=10000,
-                        random_state=42)
+                        random_state=42, learning_rate='adaptive')
     mlp.fit(x_train, y_train)
     y_predict = mlp.predict(x_test)
     accuracy = accuracy_score(y_test, y_predict)
     print(f"Accuracy: {accuracy}")
+
 
 def apply_mlp_normal(normalization_type, train_size, n_hidden, optimizer, activation):
     x = data_loader("Datasets/" + normalization_type + "_dataset.csv")
@@ -39,18 +40,19 @@ def apply_mlp_normal(normalization_type, train_size, n_hidden, optimizer, activa
     x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=train_size, random_state=42)
     mlp = MLPClassifier(verbose=True, hidden_layer_sizes=(n_hidden,), solver=optimizer, activation=activation,
                         max_iter=10000,
-                        random_state=42)
+                        random_state=42, learning_rate='adaptive')
     mlp.fit(x_train, y_train)
     y_predict = mlp.predict(x_test)
     accuracy = accuracy_score(y_test, y_predict)
     print(f"Accuracy: {accuracy}")
+
 
 def apply_mlp_raw(train_size, n_hidden, optimizer, activation):
     x = data_loader("train.csv")
     y = pd.Series(x['price_range'])
     x = x.iloc[:, :-1]
     x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=train_size, random_state=42)
-    mlp = MLPClassifier(verbose=True, hidden_layer_sizes=(n_hidden,), solver=optimizer, activation=activation, max_iter=10000,
+    mlp = MLPClassifier(hidden_layer_sizes=(n_hidden,), solver=optimizer, activation=activation, max_iter=10000,
                         random_state=42)
     mlp.fit(x_train, y_train)
     y_predict = mlp.predict(x_test)
@@ -58,7 +60,7 @@ def apply_mlp_raw(train_size, n_hidden, optimizer, activation):
     print(f"Accuracy: {accuracy}")
 
 
-def mlp_model(dataset="raw", normalization_type="raw", train_size=0.8, n_hidden=18, optimizer='adam', activation='softmax'):
+def mlp_model(dataset="raw", normalization_type="raw", train_size=0.8, n_hidden=18, optimizer='adam', activation='identity'):
     if dataset == "fe_resolution":
         apply_mlp_fe_resolution(normalization_type, train_size, n_hidden, optimizer, activation)
     elif dataset == "fe_screen_size":
