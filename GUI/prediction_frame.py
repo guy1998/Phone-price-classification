@@ -1,6 +1,4 @@
 import tkinter as tk
-from tkinter import font
-from GUI.Controller import get_model
 from GUI.Controller import change_state, change_true
 from GUI.scrollable_instance_info import scrollable_part
 from GUI.right_side_of_the_frame import RightSide

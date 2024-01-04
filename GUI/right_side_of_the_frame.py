@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import font
 from GUI.Controller import get_model
+from GUI.front_end_models import get_model_function_by_name
 
 
 class RightSide(tk.Frame):
@@ -17,5 +18,6 @@ class RightSide(tk.Frame):
         self.text_about_prediction.insert("end", text)
         self.text_about_prediction.grid(row=2, columnspan=4, pady=10)
 
-        self.predict_button = tk.Button(self, text='Predict', width=45, height=3)
+        self.predict_button = tk.Button(self, text='Predict', width=45, height=3,
+                                        command=get_model_function_by_name(get_model()))
         self.predict_button.grid(row=4, columnspan=3)

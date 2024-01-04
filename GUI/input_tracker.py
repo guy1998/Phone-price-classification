@@ -34,7 +34,7 @@ user_input = {
     'four_g': 0,
     'int_memory': 0,
     'm_dep': 0,
-    'mobile_w': 0,
+    'mobile_wt': 0,
     'n_cores': 0,
     'pc': 0,
     'px_height': 0,

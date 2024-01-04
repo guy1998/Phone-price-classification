@@ -19,7 +19,7 @@ def mlp_ui():
     y = pd.Series(x['price_range'])
     x = x.iloc[:, 1:-1]
     x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8, random_state=42)
-    mlp = MLPClassifier(verbose=True, hidden_layer_sizes=(5,), solver="adam", activation='identity',
+    mlp = MLPClassifier(verbose=False, hidden_layer_sizes=(5,), solver="adam", activation='identity',
                         max_iter=10000,
                         random_state=42, learning_rate='adaptive')
     mlp.fit(x_train, y_train)

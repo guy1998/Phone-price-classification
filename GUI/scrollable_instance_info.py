@@ -35,7 +35,7 @@ def create_widgets_for_continuous_features(scrollable_frame):
         temp_label = ttk.Label(scrollable_frame, text=feature + ":")
         temp_label.pack()
         entry = tk.Entry(scrollable_frame)
-        entry.bind("<Key>", lambda event: set_user_input(feature, event.widget.get()))
+        entry.bind("<KeyRelease>", lambda event, feature=feature: set_user_input(feature, float(event.widget.get())))
         entry.pack()
 
 
@@ -46,7 +46,7 @@ def create_widgets_for_categorical_features(scrollable_frame):
         temp_label.pack()
         selected_option = tk.StringVar()
         dropdown = ttk.OptionMenu(scrollable_frame, selected_option, "No", "Yes", "No",
-                                  command=lambda value: set_user_input(feature, 1) if value == "Yes" else set_user_input(feature, 0))
+                                  command=lambda value, feature=feature: set_user_input(feature, 1) if value == "Yes" else set_user_input(feature, 0))
         dropdown.config(width=15)
         dropdown.pack(pady=(0, 5))
 
