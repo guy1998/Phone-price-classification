@@ -12,7 +12,7 @@ names_of_categorical_features = ["blue", "dual_sim", "four_g", "three_g", "touch
 def apply_mlp():
     model, accuracy = mlp_ui()
     df = pd.DataFrame(get_user_input(), index=[0])
-    numerical_features = [x for x in list(df.iloc[:0, :]) if x not in names_of_categorical_features]
+    numerical_features = [x for x in list(df.iloc[:0, :-1]) if x not in names_of_categorical_features]
     df = decimal_scaling(df, numerical_features)
     prediction = model.predict(df)
     create_result_prompt(prediction, accuracy)
@@ -22,7 +22,7 @@ def apply_decision_tree():
     model, accuracy = decision_tree_ui()
     df = pd.DataFrame(get_user_input(), index=[0])
     df = create_dataset_with_screen_size(df)
-    numerical_features = [x for x in list(df.iloc[:0, :]) if x not in names_of_categorical_features]
+    numerical_features = [x for x in list(df.iloc[:0, :-1]) if x not in names_of_categorical_features]
     df = decimal_scaling(df, numerical_features)
     prediction = model.predict(df)
     create_result_prompt(prediction, accuracy)
@@ -40,7 +40,15 @@ def apply_logistic_regression():
 
 
 def apply_naive_bayes():
-    pass
+    model, accuracy = naive_bayes_ui()
+    df = pd.DataFrame(get_user_input(), index=[0])
+    df = create_dataset_with_screen_size(df)
+    numerical_features = [x for x in list(df.iloc[:0, :-1]) if x not in names_of_categorical_features]
+    df = decimal_scaling(df, numerical_features)
+    for i in range(len(df.columns)):
+        print(df.iloc[:, i])
+    prediction = model.predict(df)
+    create_result_prompt(prediction, accuracy)
 
 
 def apply_random_forest():

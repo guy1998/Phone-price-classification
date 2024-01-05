@@ -10,7 +10,10 @@ def decimal_scaling(data, numerical_features):
         # condition added so that the non-numerical values stay as they are
         if feature in numerical_features:
             magnitude = 10 ** (np.ceil(np.log10(np.abs(data[feature]).max())))
-            scaled_data[feature] = data[feature] / magnitude
+            if magnitude == 0:
+                scaled_data[feature] = 0
+            else:
+                scaled_data[feature] = data[feature] / magnitude
     return scaled_data
 
 

@@ -45,8 +45,9 @@ def create_widgets_for_categorical_features(scrollable_frame):
         temp_label = ttk.Label(scrollable_frame, text=feature + ":")
         temp_label.pack()
         selected_option = tk.StringVar()
+        dict = {"Yes": 1, "No": 0}
         dropdown = ttk.OptionMenu(scrollable_frame, selected_option, "No", "Yes", "No",
-                                  command=lambda value, feature=feature: set_user_input(feature, 1) if value == "Yes" else set_user_input(feature, 0))
+                                  command=lambda value, feature=feature: set_user_input(feature, dict[value]))
         dropdown.config(width=15)
         dropdown.pack(pady=(0, 5))
 

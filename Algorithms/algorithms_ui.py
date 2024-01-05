@@ -57,7 +57,7 @@ def logistic_regression_ui():
     x = data_loader("train.csv")
     y = pd.Series(x['price_range'])
     x = x.iloc[:, :-1]
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.8, random_state=7)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=7)
     clf = LogisticRegression(max_iter=10000)
     clf.fit(x_train, y_train)
     y_predict = clf.predict(x_test)
@@ -66,11 +66,10 @@ def logistic_regression_ui():
 
 
 def naive_bayes_ui():
-    x = data_loader("train.csv")
+    x = data_loader("Datasets/fe_screen_size_decimal_dataset.csv")
     y = pd.Series(x['price_range'])
-    x = x.iloc[:, :-1]
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.8, random_state=7)
-    print(x_train)
+    x = x.iloc[:, 1:-1]
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=7)
     clf = GaussianNB()
     clf.fit(x_train, y_train)
     y_predict = clf.predict(x_test)
