@@ -1,7 +1,7 @@
 from Algorithms.algorithms_ui import *
 import pandas as pd
 from GUI.input_tracker import get_user_input
-from Data_Manipulation.normalization import decimal_scaling
+from Data_Manipulation.normalization import decimal_scaling, z_score_normalizer
 from GUI.results import create_result_prompt
 from Data_Manipulation.feature_engineering import create_dataset_with_screen_size
 
@@ -36,7 +36,14 @@ def apply_svm():
 
 
 def apply_logistic_regression():
-    pass
+    model, accuracy = logistic_regression_ui()
+    df = pd.DataFrame(get_user_input(), index=[0])
+    df = create_dataset_with_screen_size(df)
+    numerical_features = [x for x in list(df.iloc[:0, :-1]) if x not in names_of_categorical_features]
+    df = pd.concat([z_score_normalizer(df, numerical_features),
+                                    df.loc[:, names_of_categorical_features]], axis=1)
+    prediction = model.predict(df)
+    create_result_prompt(prediction, accuracy)
 
 
 def apply_naive_bayes():
@@ -45,8 +52,6 @@ def apply_naive_bayes():
     df = create_dataset_with_screen_size(df)
     numerical_features = [x for x in list(df.iloc[:0, :-1]) if x not in names_of_categorical_features]
     df = decimal_scaling(df, numerical_features)
-    for i in range(len(df.columns)):
-        print(df.iloc[:, i])
     prediction = model.predict(df)
     create_result_prompt(prediction, accuracy)
 
