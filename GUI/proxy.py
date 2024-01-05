@@ -29,7 +29,10 @@ def apply_decision_tree():
 
 
 def apply_svm():
-    pass
+    model, accuracy = svm_ui()
+    df = pd.DataFrame(get_user_input(), index=[0])
+    prediction = model.predict(df)
+    create_result_prompt(prediction, accuracy)
 
 
 def apply_logistic_regression():

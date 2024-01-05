@@ -44,9 +44,9 @@ def svm_ui():
     x = data_loader("train.csv")
     y = pd.Series(x['price_range'])
     x = x.iloc[:, :-1]
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.8, random_state=7)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=7)
     print(x_train)
-    clf = svm.SVC(kernel="poly", degree=3)
+    clf = svm.SVC(kernel="linear")
     clf.fit(x_train, y_train)
     y_predict = clf.predict(x_test)
     accuracy = accuracy_score(y_test, y_predict)
