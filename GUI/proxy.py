@@ -57,7 +57,14 @@ def apply_naive_bayes():
 
 
 def apply_random_forest():
-    pass
+    model, accuracy = random_forest_ui()
+    df = pd.DataFrame(get_user_input(), index=[0])
+    df = create_dataset_with_screen_size(df)
+    numerical_features = [x for x in list(df.iloc[:0, :-1]) if x not in names_of_categorical_features]
+    df = pd.concat([z_score_normalizer(df, numerical_features),
+                    df.loc[:, names_of_categorical_features]], axis=1)
+    prediction = model.predict(df)
+    create_result_prompt(prediction, accuracy)
 
 
 def apply_hybrid_log():

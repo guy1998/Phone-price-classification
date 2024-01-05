@@ -78,12 +78,11 @@ def naive_bayes_ui():
 
 
 def random_forest_ui():
-    x = data_loader("train.csv")
+    x = data_loader("Datasets/fe_screen_size_z_score_dataset.csv")
     y = pd.Series(x['price_range'])
-    x = x.iloc[:, :-1]
+    x = x.iloc[:, 1:-1]
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.8, random_state=7)
-    print(x_train)
-    clf = RandomForestClassifier(n_estimators=100)
+    clf = RandomForestClassifier(n_estimators=500, criterion='gini')
     clf.fit(x_train, y_train)
     y_predict = clf.predict(x_test)
     accuracy = accuracy_score(y_test, y_predict)
@@ -93,7 +92,7 @@ def random_forest_ui():
 def ensemble_ui():
     df = data_loader("train.csv")
     y = df['price_range']
-    x = df.iloc[:, :-1]
+    x = df.iloc[:, 1:-1]
     data_tuple = train_test_split(x, y, train_size=0.8, random_state=42)
     clf = RandomForestClassifier(random_state=42)
     clf.fit(data_tuple[0], data_tuple[2])
@@ -112,7 +111,7 @@ def ensemble_ui():
 def ensemble_log_ui():
     df = data_loader("train.csv")
     y = df['price_range']
-    x = df.iloc[:, :-1]
+    x = df.iloc[:, 1:-1]
     data_tuple = train_test_split(x, y, train_size=0.8, random_state=42)
     clf = LogisticRegression(random_state=42)
     clf.fit(data_tuple[0], data_tuple[2])
