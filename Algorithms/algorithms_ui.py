@@ -90,7 +90,7 @@ def random_forest_ui():
 
 
 def ensemble_ui():
-    df = data_loader("train.csv")
+    df = data_loader("Datasets/fe_screen_size_z_score_dataset.csv")
     y = df['price_range']
     x = df.iloc[:, 1:-1]
     data_tuple = train_test_split(x, y, train_size=0.8, random_state=42)
@@ -99,29 +99,29 @@ def ensemble_ui():
     encoder = OneHotEncoder(sparse_output=False)
     y_train_encoded = encoder.fit_transform(data_tuple[2].to_numpy().reshape(-1, 1))
     model = Sequential()
-    model.add(Dense(20 + 1, input_dim=20, activation='relu'))
+    model.add(Dense(20 + 1, input_dim=19, activation='relu'))
     model.add(Dense(4, activation='softmax'))
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     model.fit(data_tuple[0], y_train_encoded, epochs=50, batch_size=8, verbose=0)
     y_pred_ensemble = np.argmax(model.predict(data_tuple[1]) + clf.predict_proba(data_tuple[1]), axis=1)
     accuracy_ensemble = accuracy_score(data_tuple[3], y_pred_ensemble)
-    return model, accuracy_ensemble
+    return clf, model, accuracy_ensemble
 
 
 def ensemble_log_ui():
-    df = data_loader("train.csv")
+    df = data_loader("Datasets/fe_screen_size_z_score_dataset.csv")
     y = df['price_range']
     x = df.iloc[:, 1:-1]
     data_tuple = train_test_split(x, y, train_size=0.8, random_state=42)
-    clf = LogisticRegression(random_state=42)
+    clf = LogisticRegression(random_state=42, solver='lbfgs')
     clf.fit(data_tuple[0], data_tuple[2])
     encoder = OneHotEncoder(sparse_output=False)
     y_train_encoded = encoder.fit_transform(data_tuple[2].to_numpy().reshape(-1, 1))
     model = Sequential()
-    model.add(Dense(20 + 1, input_dim=20, activation='relu'))
+    model.add(Dense(20 + 1, input_dim=19, activation='relu'))
     model.add(Dense(4, activation='softmax'))
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     model.fit(data_tuple[0], y_train_encoded, epochs=50, batch_size=8, verbose=0)
     y_pred_ensemble = np.argmax(model.predict(data_tuple[1]) + clf.predict_proba(data_tuple[1]), axis=1)
     accuracy_ensemble = accuracy_score(data_tuple[3], y_pred_ensemble)
-    return model, accuracy_ensemble
+    return clf, model, accuracy_ensemble
