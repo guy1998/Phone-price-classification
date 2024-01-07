@@ -35,7 +35,7 @@ def ensemble(input_size, data_tuple):
 
 
 def ensemble_log(input_size, data_tuple):
-    clf = LogisticRegression(max_iter=10000, random_state=42)
+    clf = LogisticRegression(max_iter=10000, random_state=42, solver='lbfgs')
     clf.fit(data_tuple[0], data_tuple[2])
     encoder = OneHotEncoder(sparse_output=False)
     y_train_encoded = encoder.fit_transform(data_tuple[2].to_numpy().reshape(-1, 1))

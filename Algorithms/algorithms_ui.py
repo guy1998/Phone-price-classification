@@ -94,12 +94,12 @@ def ensemble_ui():
     y = df['price_range']
     x = df.iloc[:, 1:-1]
     data_tuple = train_test_split(x, y, train_size=0.8, random_state=42)
-    clf = RandomForestClassifier(random_state=42)
+    clf = RandomForestClassifier(random_state=42, criterion='gini', n_estimators=100)
     clf.fit(data_tuple[0], data_tuple[2])
     encoder = OneHotEncoder(sparse_output=False)
     y_train_encoded = encoder.fit_transform(data_tuple[2].to_numpy().reshape(-1, 1))
     model = Sequential()
-    model.add(Dense(20 + 1, input_dim=19, activation='relu'))
+    model.add(Dense(5, input_dim=19, activation='relu'))
     model.add(Dense(4, activation='softmax'))
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     model.fit(data_tuple[0], y_train_encoded, epochs=50, batch_size=8, verbose=0)
@@ -113,12 +113,12 @@ def ensemble_log_ui():
     y = df['price_range']
     x = df.iloc[:, 1:-1]
     data_tuple = train_test_split(x, y, train_size=0.8, random_state=42)
-    clf = LogisticRegression(random_state=42, solver='lbfgs')
+    clf = LogisticRegression(random_state=42, solver='sag')
     clf.fit(data_tuple[0], data_tuple[2])
     encoder = OneHotEncoder(sparse_output=False)
     y_train_encoded = encoder.fit_transform(data_tuple[2].to_numpy().reshape(-1, 1))
     model = Sequential()
-    model.add(Dense(20 + 1, input_dim=19, activation='relu'))
+    model.add(Dense(5, input_dim=19, activation='relu'))
     model.add(Dense(4, activation='softmax'))
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
     model.fit(data_tuple[0], y_train_encoded, epochs=50, batch_size=8, verbose=0)

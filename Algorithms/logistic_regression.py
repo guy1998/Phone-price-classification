@@ -46,14 +46,14 @@ def apply_logistic_regression_raw_dataset(train_split, max_iter):
     y = pd.Series(x['price_range'])
     x = x.iloc[:, :-1]
     x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=(1 - train_split), random_state=7)
-    clf = LogisticRegression(max_iter=max_iter)
+    clf = LogisticRegression(max_iter=max_iter, solver='liblinear')
     clf.fit(x_train, y_train)
     y_predict = clf.predict(x_test)
     accuracy = accuracy_score(y_test, y_predict)
     print(f"Accuracy: {accuracy}")
 
 
-def logistic_regression(dataset="raw", normalization="raw", train_split=0.8, max_iter=1000):
+def logistic_regression(dataset="raw", normalization="raw", train_split=0.8, max_iter=25000):
     if dataset == "normal":
         apply_logistic_regression_normal_dataset(normalization, train_split, max_iter)
     elif dataset == "fe_resolution":
@@ -61,7 +61,7 @@ def logistic_regression(dataset="raw", normalization="raw", train_split=0.8, max
     elif dataset == "fe_screen_size":
         apply_logistic_regression_fe_screen_size_dataset(normalization, train_split, max_iter)
     elif dataset == "raw":
-        apply_logistic_regression_raw_dataset(train_split)
+        apply_logistic_regression_raw_dataset(train_split, max_iter)
     else:
         raise Exception("No such dataset!")
 
