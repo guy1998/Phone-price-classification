@@ -25,8 +25,12 @@ For the general results and conclusions of the project refer to this document: h
 ## GUI
 The user interface of this program was developed using python and especially the tkinter library. More information on the library is found at: https://docs.python.org/3/library/tkinter.html . The goal of this interface is to allow users with no experience in AI to choose a machine learning model and perform predictions without any knowledge about the internal implementation. The user is provided the predicted price range and the accuracy of prediction each time.
 <p align="center">
-  <img width="955" alt="image" src="https://github.com/guy1998/Phone-price-classification/assets/104024859/a141392b-a583-4449-96ca-5320d43d3b19">
-  As it can be seen here the main page of the program allows the user to pick the machine learning model they prefer. It is a pretty straightforward menu containing only buttons with the name of the model on them. After a model is selected the program navigates to the prediction page that can be seen below.
-  <img width="960" alt="image" src="https://github.com/guy1998/Phone-price-classification/assets/104024859/ad00251f-cf49-44fd-99b7-4391647ce94a">
+  <img width="955" alt="image" src="https://github.com/guy1998/Phone-price-classification/assets/104024859/a141392b-a583-4449-96ca-5320d43d3b19"> <br>
+  <p align="left">
+    As it can be seen here the main page of the program allows the user to pick the machine learning model they prefer. It is a pretty straightforward menu containing only buttons with the name of the model on them. After a model is selected the program navigates to the prediction page that can be seen below.
+  </p>
+  <img width="960" alt="image" src="https://github.com/guy1998/Phone-price-classification/assets/104024859/ad00251f-cf49-44fd-99b7-4391647ce94a"> <br>
+  <p align="left">
   On the prediction page on the left of the screen user can apply all the parameters of this new instance of a mobile phone such as battery power, RAM, clock speed, camera, and so on. The user is provided with the information on the expected prediction that is written in the text box on the right. Once the user fills all the fields he can press predict and that will automatically start the model's work to provide a prediction. When the execution finishes an alert box containing the prediction and the accuracy of this prediction is shown to the user as can be seen in the picture.
+  </p>
 </p>
